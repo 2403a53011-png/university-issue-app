@@ -1,0 +1,23 @@
+{
+  "name": "university-student-issue-management-system",
+  "version": "1.0.0",
+  "description": "Centralized University Student Issue & Requirement Management System",
+  "scripts": {
+    "install:all": "cd backend && npm install && cd ../frontend && npm install",
+    "build": "cd frontend && npm run build",
+    "start": "cd backend && node server.js",
+    "dev:backend": "cd backend && node server.js",
+    "dev:frontend": "cd frontend && npm run dev"
+  },
+  "keywords": [
+    "university",
+    "student-issues",
+    "admin-portal",
+    "complaint-management",
+    "pwa",
+    "capacitor",
+    "android"
+  ],
+  "author": "Apex State University Development Team",
+  "license": "ISC"
+}
