@@ -7,7 +7,6 @@ import {
   Lock, 
   ArrowRight, 
   AlertCircle, 
-  Sparkles,
   Smartphone,
   CheckCircle
 } from 'lucide-react';
@@ -22,7 +21,7 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const [showInstallModal, setShowInstallModal] = useState(false);
 
-  const { login, quickLogin } = useAuth();
+  const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleTabChange = (role) => {
@@ -46,23 +45,6 @@ export default function Login() {
       }
     } catch (err) {
       setError(err.message || 'Login failed. Please check credentials.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleDemoLogin = async (role, userIdentifier, userPassword) => {
-    setError('');
-    setLoading(true);
-    try {
-      const user = await quickLogin(userIdentifier, userPassword, role);
-      if (user.role === 'admin') {
-        navigate('/admin/dashboard');
-      } else {
-        navigate('/student/dashboard');
-      }
-    } catch (err) {
-      setError(err.message || 'Demo login failed');
     } finally {
       setLoading(false);
     }
@@ -198,92 +180,6 @@ export default function Login() {
               <ArrowRight size={16} />
             </button>
           </form>
-
-          {/* Quick Demo Logins */}
-          <div className="mt-8 pt-6 border-t border-slate-100">
-            <div className="flex items-center gap-1.5 text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">
-              <Sparkles size={14} className="text-amber-500" />
-              <span>One-Click Demo Accounts</span>
-            </div>
-
-            {activeTab === 'student' ? (
-              <div className="space-y-2">
-                <button
-                  type="button"
-                  onClick={() => handleDemoLogin('student', 'student1', 'student123')}
-                  className="w-full p-2.5 rounded-xl border border-slate-200 hover:border-blue-400 hover:bg-blue-50/50 flex items-center justify-between text-left transition-colors group"
-                >
-                  <div>
-                    <div className="text-xs font-bold text-slate-900 group-hover:text-blue-700">
-                      Rahul Kumar (CS, Year 3)
-                    </div>
-                    <div className="text-[11px] text-slate-500">
-                      ID: STU-2024-001 • Has active & resolved issues
-                    </div>
-                  </div>
-                  <span className="text-[11px] font-semibold text-blue-600 bg-blue-100/60 px-2 py-1 rounded-md">
-                    Quick Login
-                  </span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => handleDemoLogin('student', 'student2', 'student123')}
-                  className="w-full p-2.5 rounded-xl border border-slate-200 hover:border-blue-400 hover:bg-blue-50/50 flex items-center justify-between text-left transition-colors group"
-                >
-                  <div>
-                    <div className="text-xs font-bold text-slate-900 group-hover:text-blue-700">
-                      Priya Sharma (EE, Year 2)
-                    </div>
-                    <div className="text-[11px] text-slate-500">
-                      ID: STU-2024-002 • Has pending classroom issue
-                    </div>
-                  </div>
-                  <span className="text-[11px] font-semibold text-blue-600 bg-blue-100/60 px-2 py-1 rounded-md">
-                    Quick Login
-                  </span>
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => handleDemoLogin('student', 'student3', 'student123')}
-                  className="w-full p-2.5 rounded-xl border border-slate-200 hover:border-blue-400 hover:bg-blue-50/50 flex items-center justify-between text-left transition-colors group"
-                >
-                  <div>
-                    <div className="text-xs font-bold text-slate-900 group-hover:text-blue-700">
-                      Arjun Reddy (Mech, Year 4)
-                    </div>
-                    <div className="text-[11px] text-slate-500">
-                      ID: STU-2024-003 • Has hostel resolution feedback
-                    </div>
-                  </div>
-                  <span className="text-[11px] font-semibold text-blue-600 bg-blue-100/60 px-2 py-1 rounded-md">
-                    Quick Login
-                  </span>
-                </button>
-              </div>
-            ) : (
-              <div className="space-y-2">
-                <button
-                  type="button"
-                  onClick={() => handleDemoLogin('admin', 'admin', 'admin123')}
-                  className="w-full p-2.5 rounded-xl border border-purple-200 hover:border-purple-400 hover:bg-purple-50/50 flex items-center justify-between text-left transition-colors group"
-                >
-                  <div>
-                    <div className="text-xs font-bold text-slate-900 group-hover:text-purple-700">
-                      Dr. Sarah Jenkins (Dean of Student Affairs)
-                    </div>
-                    <div className="text-[11px] text-slate-500">
-                      Admin ID: ADM-2024-001 • Full issue resolution rights
-                    </div>
-                  </div>
-                  <span className="text-[11px] font-semibold text-purple-700 bg-purple-100 px-2 py-1 rounded-md">
-                    Quick Login
-                  </span>
-                </button>
-              </div>
-            )}
-          </div>
 
         </div>
       </div>
